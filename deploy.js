@@ -1,45 +1,30 @@
+const fs = require('node:fs');
 const { REST, Routes } = require('discord.js');
-const { token, clientId } = require('./config');
+const { token, clientId } = require('./config.js');
 
-const commands = [
-    {
-        name: 'info',
-        description: 'See the info of the bot',
-    },
-    {
-        name: 'kick',
-        description: 'Kicks a member from the server',
-        options: [
-            {
-                type: 6, // USER
-                name: 'member',
-                description: 'The member to kick',
-                required: true,
-            },
-            {
-                type: 3, // STRING
-                name: 'reason',
-                description: 'The reason for the kick',
-                required: false,
-            },
-        ],
-    },
-];
+const commands = [];
+const commandFiles = fs.readdirSync('./').filter(file => file.endsWith('.js'));
+
+// Ajouter les commandes 'ban', 'info' et 'kick'
+for (const file of commandFiles) {
+    const command = require(`./${file}`);
+    if (command.data) {
+        commands.push(command.data.toJSON());
+    }
+}
 
 const rest = new REST({ version: '10' }).setToken(token);
 
 (async () => {
     try {
-        console.log('Refreshing application commands...');
-
+        console.log('Started refreshing application (/) commands.');
         await rest.put(
             Routes.applicationCommands(clientId),
             { body: commands },
         );
-
-        console.log('Successfully registered application commands.');
+        console.log('Successfully reloaded application (/) commands.');
     } catch (error) {
-        console.error('Error while registering commands:', error);
+        console.error(error);
     }
 })();
 
