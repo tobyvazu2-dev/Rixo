@@ -14,6 +14,8 @@ bot.on('messageCreate', message => {
       if (message.content === "What is the best middle school ?") {
       message.reply("[Middle school Gay-Lussac](https://www.google.com/maps/place/Coll%C3%A8ge+Gay+Lussac/@48.9252994,2.2483311,1144m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47e665cf6819395f:0xbeb91dd6df904744!8m2!3d48.9252994!4d2.2483311!16s%2Fg%2F1tdzqfj4?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D)")
       }
+      if (message.content === "help") {
+        message.reply("Ping a staff or wait until a staff see your message")
 }); 
 
 
