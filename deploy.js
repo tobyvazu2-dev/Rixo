@@ -5,7 +5,6 @@ const { token, clientId } = require('./config.js');
 const commands = [];
 const commandFiles = fs.readdirSync('./').filter(file => file.endsWith('.js'));
 
-// Ajouter les commandes 'ban', 'info' et 'kick'
 for (const file of commandFiles) {
     const command = require(`./${file}`);
     if (command.data) {
