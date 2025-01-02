@@ -16,6 +16,7 @@ bot.on('messageCreate', message => {
       }
       if (message.content === "help") {
         message.reply("Ping a staff or wait until a staff see your message")
+      }
 }); 
 
 
